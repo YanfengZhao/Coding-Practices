@@ -25,3 +25,28 @@ public class Solution {
         return result;
     }
 }
+
+// recursion
+public class Solution {
+    public List<String> result = new ArrayList<String>();
+    public String[] dict = {" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    public List<String> letterCombinations(String digits) {
+        dfs(digits,"");
+        return result;
+    }
+    
+    public void dfs(String digits, String build){
+        if(digits.length()==build.length()){
+            if(build.length()>0)
+                result.add(build);
+            return;
+        }
+        int cur = build.length();
+        int currDigit = digits.charAt(cur) - '0';
+        String perm = dict[currDigit];
+        for(int i = 0; i < perm.length(); i++){
+            dfs(digits,build+perm.charAt(i));
+        }
+        return;
+    }
+}
