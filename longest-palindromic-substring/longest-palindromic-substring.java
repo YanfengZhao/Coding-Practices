@@ -1,3 +1,13 @@
+/*
+Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
+*/
+
+// The key to this problem is adding the '#' between each character. 
+// This way removes the corner cases of having an odd vs even palindrome.
+// Then for every character in the string, expand until its palindromic nature becomes invalid 
+// while keeping track of the longest palindrome and its middle index.
+// Finally use Stringbuilder to build the recorded max palindrome
+
 public class Solution {
     public String longestPalindrome(String s) {
         if(s.length()==0)

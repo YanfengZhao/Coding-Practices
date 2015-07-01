@@ -1,3 +1,15 @@
+/*
+Write a function to find the longest common prefix string amongst an array of strings.
+*/
+
+// The following implementation set the first string as the prefix, or the key.
+// Compare the key with every other string by calling findCommon().
+// The method returns a string in which the 2 strings have in common and update the key with it.
+// After comparing n-1 times, the key is the longest common prefix.
+
+// Another approach is similar to bfs, where you compare the first character of every string 
+// to each other, if all the same, compare the next character of each string, until one is different.
+
 public class Solution {
     public String longestCommonPrefix(String[] strs) {
         if (strs.length == 0){
