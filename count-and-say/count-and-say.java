@@ -1,3 +1,21 @@
+/*
+The count-and-say sequence is the sequence of integers beginning as follows:
+1, 11, 21, 1211, 111221, ...
+
+1 is read off as "one 1" or 11.
+11 is read off as "two 1s" or 21.
+21 is read off as "one 2, then one 1" or 1211.
+Given an integer n, generate the nth sequence.
+
+Note: The sequence of integers will be represented as a string.
+*/
+
+// use recursion to this problem by creating a helper recursive method.
+// first parameter contains the initial string, second parameter contains the current index, third parameter contains the index trying to reach.
+// base case is when index == target.
+// save the 0th index and start at 1st index.
+// count and add the number of appearances in the string builder. 
+
 public class Solution {
     public String countAndSay(int n) {
         int counter = 0;
