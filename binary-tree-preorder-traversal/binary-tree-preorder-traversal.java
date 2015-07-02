@@ -1,3 +1,18 @@
+/*
+Given a binary tree, return the preorder traversal of its nodes' values.
+
+For example:
+Given binary tree {1,#,2,3},
+   1
+    \
+     2
+    /
+   3
+return [1,2,3].
+
+Note: Recursive solution is trivial, could you do it iteratively?
+*/
+
 /**
  * Definition for binary tree
  * public class TreeNode {
@@ -7,6 +22,12 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+// Out of the 3 traversals, this is the most simple one. middle -> left -> right.
+// First add the root to the stack.
+// While stack not empty, pop, it has right child, add to stack, if have left child, add to stack.
+// REMEMBER push the right child on stack first since stack is LIFO so that the left child get printed first.
+
 // recursive
 /*public class Solution {
     private List<Integer> preorder = new LinkedList<Integer>();

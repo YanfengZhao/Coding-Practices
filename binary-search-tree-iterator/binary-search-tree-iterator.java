@@ -14,6 +14,13 @@ Note: next() and hasNext() should run in average O(1) time and uses O(h) memory,
  * }
  */
 
+// Similar to inorder traversal.
+// If have left child, push all on to stack in the constructor.
+// hasNext() just need to check if stack is empty.
+// in next(), if hasNext() == false, return 0.
+// else, pop one off stack, check if the one has right child.
+// if it does, add all it's left child nodes to stack.
+
 public class BSTIterator {
     Stack<TreeNode> stack = new Stack<TreeNode>();
     TreeNode curr;
