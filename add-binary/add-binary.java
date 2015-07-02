@@ -1,3 +1,18 @@
+/*
+Given two binary strings, return their sum (also a binary string).
+
+For example,
+a = "11"
+b = "1"
+Return "100".
+*/
+
+// First for the convenience of adding two numbers, always make sure they are aligned correctly 
+// by appending 0s to the most significant places for the short number.
+// After that all that's left is adding from least significant bit to the most significant bit
+// and keep track of the carries.
+// Lastly if the result overflows with the extra carry bit, add an "1" in front of the string.
+
 public class Solution {
     public String addBinary(String a, String b) {
         int carry = 0;

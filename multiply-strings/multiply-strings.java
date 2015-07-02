@@ -1,3 +1,13 @@
+/*
+Given two numbers represented as strings, return multiplication of the numbers as a string.
+
+Note: The numbers can be arbitrarily large and are non-negative.
+*/
+
+// create an array named product with size n1Size + n2Size, since when you multiply 2 numbers their product length must be equal or less than the 2 length combine.
+// product[i+j+1] += (num1.charAt(i)-'0') * (num2.charAt(j)-'0'); i and j are index for the nested for loops that traverse both integer strings
+// Lastly deal with the carry bit for if the numbers in the array is greater than 9
+
 public class Solution {
     public String multiply(String num1, String num2) {
         int n1Size = num1.length();
