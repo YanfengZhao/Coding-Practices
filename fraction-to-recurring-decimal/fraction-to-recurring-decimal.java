@@ -10,7 +10,10 @@ Given numerator = 2, denominator = 1, return "2".
 Given numerator = 2, denominator = 3, return "0.(6)".
 */
 
-// cannot use double because not enough range
+// cannot use double because not enough range.
+// convert to long.
+// if no reminder, simply output.
+// other wise deal with reminder.
 
 public class Solution {
     public String fractionToDecimal(int numerator, int denominator) {
