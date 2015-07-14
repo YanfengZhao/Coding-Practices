@@ -46,12 +46,6 @@ public class Solution {
         		result = prev.get(i);
         	}
         }
-//        for(List<Integer> k:dp){
-//        	for(int a: k){
-//        		System.out.print(a+" ");
-//        	}
-//        	System.out.println("\n");
-//        }
         return result;
     }
 }
