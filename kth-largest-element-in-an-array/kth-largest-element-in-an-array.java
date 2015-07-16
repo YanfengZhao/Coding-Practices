@@ -8,7 +8,7 @@ Note:
 You may assume k is always valid, 1 ≤ k ≤ array's length.
 */
 
-// Use a priority queue (min-heap).
+// Use a priority queue (min-heap). O(n log k) time O(k) space.
 // Make sure to keep priority queue at size k by removing the root when size is k+1.
 // The element removed each time is the smallest in the heap.
 // Lastly poll again to get the kth largest element.
