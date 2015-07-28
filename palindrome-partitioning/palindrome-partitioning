@@ -1,0 +1,55 @@
+/*
+Given a string s, partition s such that every substring of the partition is a palindrome.
+
+Return all possible palindrome partitioning of s.
+
+For example, given s = "aab",
+Return
+
+  [
+    ["aa","b"],
+    ["a","a","b"]
+  ]
+*/
+
+// DFS recursion backtracking. Keep a global result.
+// In the helper method, if length of the string is 0, means there is no more string to partition,
+// this also means a partition is found, so add to result.
+// If the length of the string is not equal to 0, you traverse every character.
+// If everything up to that character (p1) is palindrome, add to the curList, and call the recursive function
+// on the rest of the string (p2). 
+// Don't forget to remove the string you just added after you exit the recursive method.
+
+public class Solution {
+    List<List<String>> result = new ArrayList<List<String>>();
+    public List<List<String>> partition(String s) {
+        ArrayList<String> curList = new ArrayList<String>();
+        helper(s,curList);
+        return result;
+    }
+    
+    public void helper(String s, ArrayList<String> curList){
+        if(s.length()==0){
+            result.add(new ArrayList<String>(curList));
+        }
+        
+        for(int i = 0; i < s.length(); i++){
+            String p1 = s.substring(0,i+1); // first part of string including up to i
+            String p2 = s.substring(i+1); // second part of the string after i
+            if(isPal(p1)){ // if first part of s is palindrome
+                curList.add(p1);
+                helper(p2, curList);
+                curList.remove(curList.size()-1);
+            }
+        }
+    }
+    
+     public boolean isPal(String s){
+        for(int i=0;i<s.length()/2;i++){
+            if(s.charAt(i)!=s.charAt(s.length()-1-i)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
