@@ -7,12 +7,12 @@ For example,
 */
 
 // Very similar to permutation-i. Backtracking recursion.
-// First modification has been made is passing into recursive a visited list. 
+// First modification has been made is passing into recursive function a visited list. 
 // This avoids adding in values that belong to indexes that has already been added.
 // This modification isn't enough because TLE can occur.
 // So the second modification and the key is to first sort the array.
-// In the recursive method, if the index is not visited, also if the number before is not the same as current number and the 
-// number before has not been visited, return. This avoids duplication and more efficient.
+// In the recursive method, if the index is not visited, also if the previous number in the sorted list is == current number
+// in the sorted list, and the previous number has been visited, return. This avoids duplication and more efficient.
 
 public class Solution {
     List<List<Integer>> result = new ArrayList<List<Integer>>();
