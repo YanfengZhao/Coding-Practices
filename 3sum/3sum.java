@@ -11,7 +11,9 @@ The solution set must not contain duplicate triplets.
     (-1, -1, 2)
 */
 
-// fix the first number, then create start and end use 2-pointer method
+// Use a hashmap to avoid duplicates.
+// Sort the original array.
+// Fix the first number, then create start and end use 2-pointer method.
 
 public class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
