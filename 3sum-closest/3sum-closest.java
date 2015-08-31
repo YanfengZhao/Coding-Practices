@@ -23,15 +23,15 @@ public class Solution {
     			}
     			else if(sum > target){
     				end--;
-    				if(Math.abs(target-sum)<closest){
-    				    closest = Math.abs(target-sum);
+    				if(sum - target < closest){
+    				    closest = sum - target;
     				    closestSum = sum; 
     				}
     			}
     			else{
     				start++;
-    				if(Math.abs(target-sum)<closest){
-    				    closest = Math.abs(target-sum);
+    				if(target - sum < closest){
+    				    closest = target - sum;
     				    closestSum = sum; 
     				}
     			}
