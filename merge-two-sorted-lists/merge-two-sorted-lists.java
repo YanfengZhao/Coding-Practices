@@ -41,3 +41,37 @@ public class Solution {
         return dummy.next;
     }
 }
+
+// Solution 2, the difference is while(l1!=null || l2!=null)
+
+public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode preHead = new ListNode(-1);
+        ListNode curr = preHead;
+        while(l1 != null || l2 != null){
+            // if both not null
+            if(l1 != null && l2 != null){
+                if(l1.val<l2.val){
+                    curr.next = l1;
+                    l1 = l1.next;
+                }
+                else{
+                    curr.next = l2;
+                    l2 = l2.next;
+                }
+                curr = curr.next;
+            }
+            // if l1 != null && l2 == null
+            else if(l1 != null){
+                curr.next = l1;
+                l1 = l1.next;
+                curr = curr.next;
+            }
+            else{
+                curr.next = l2;
+                l2 = l2.next;
+                curr = curr.next;
+            }
+        }
+        return preHead.next;
+    }
+}
