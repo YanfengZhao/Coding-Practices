@@ -51,3 +51,38 @@ public class Solution {
         return prev.next;
     }
 }
+
+// This is another solution similar to the first solution, but a little more clear
+
+public class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head == null){
+            return null;
+        }
+        ListNode temp = head;
+        
+        // move temp n away from head
+        for(int i = 0; i < n; i++){
+            if(temp == null){ // incase n > number of elements in the list
+                return head;
+            }
+            temp = temp.next;
+        }
+        
+        ListNode curr = head;
+        ListNode preHead = new ListNode(-1);
+        preHead.next = head;
+        ListNode prev = preHead;
+        
+        // move temp, prev, and curr concurrently if temp is not null
+        while(temp != null){
+            temp = temp.next;
+            prev = prev.next;
+            curr = curr.next;
+        }
+        
+        // remove curr by setting prev.next to curr.next
+        prev.next = curr.next;
+        return preHead.next;
+    }
+}
