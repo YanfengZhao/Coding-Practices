@@ -9,7 +9,11 @@ Given input array nums = [1,1,2],
 Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the new length.
 */
 
-// Keep track of two indexes, first is the index you are altering, another is the index you are currently on
+// Trick of this problem is start the length at the original length of nums, then decrement.
+// Keep track of two indexes:
+// first is the index you are altering which starts at index 1, another is the index you are currently on j.
+// If the index you are currently on is equal to the one before, length--, increment the index you are on.
+// If not equal, set nums[i] = nums[j], increment i and j.
 
 public class Solution {
     public int removeDuplicates(int[] nums) {
