@@ -15,7 +15,6 @@ public class Solution {
             // if equal, don't increment i, replace the original value with something else, decrease length
             if(nums[j]==val){
                 length--;
-                nums[j] = 0;
             }
             // else alter array, increase i index
             else{
