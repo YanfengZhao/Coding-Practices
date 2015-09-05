@@ -53,3 +53,29 @@ public class Solution {
         }
     }
 }
+
+// Solution 2. Recursion, O(n), use a global sum.
+
+public class Solution {
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        helper(root,"");
+        return sum;
+    }
+    
+    public void helper(TreeNode root, String num){
+        if(root.left == null && root.right == null){
+            sum += Integer.parseInt(num+root.val);
+            return;
+        }
+        if(root.left!=null){
+            helper(root.left, num+root.val);
+        }
+        if(root.right!=null){
+            helper(root.right,num+root.val);
+        }
+    }
+}
