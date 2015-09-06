@@ -12,23 +12,13 @@ Reverse a singly linked list.
  */
 public class Solution {
     public ListNode reverseList(ListNode head) {
-        if(head == null || head.next == null){
-            return head;
+        ListNode dummy = new ListNode(-1);
+        while(head!=null){
+            ListNode temp = head.next;
+            head.next = dummy.next;
+            dummy.next = head;
+            head = temp;
         }
-        
-        // create a node before head help with reversing process
-        ListNode preHead = null; // or ListNode preHead = new ListNode(); then later change all preHead to preHead.next
-        
-        ListNode cur = head;
-        ListNode temp;
-        
-        while(cur!=null){
-            temp = cur.next;
-            cur.next = preHead;
-            preHead = cur;
-            cur = temp;
-        }
-        
-        return preHead;
+        return dummy.next;
     }
 }
