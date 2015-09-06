@@ -14,8 +14,30 @@ Given 1->1->2->3->3, return 1->2->3.
  *     ListNode(int x) { val = x; }
  * }
  */
- 
-// Create a dummy points to a head.
+
+// Solution 1, without dummy head. This is the better method.
+
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode prev = head;
+        ListNode cur = head.next;
+        while(cur!=null){
+            if(cur.val == prev.val){
+                prev.next = cur.next;
+            }
+            else{
+                prev = prev.next;
+            }
+            cur = cur.next;
+        }
+        return head;
+    }
+}
+
+// Solution 2. Create a dummy points to a head.
 
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
