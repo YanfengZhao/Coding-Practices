@@ -27,6 +27,41 @@ return
  * }
  */
  
+// Solution 1 does not use global result, it is passed in.
+// You also call the helper method on null nodes, but it will be taken care of first thing in the method.
+// For every node you add into currPath, subtract the value from sum.
+// Base case is when you hit the leaf node.
+
+public class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(root == null){
+            return result;
+        }
+        helper(root,sum,result,new ArrayList<Integer>());
+        return result;
+    }
+    
+    public void helper(TreeNode node, int sum, List<List<Integer>> result, List<Integer> currPath){
+        if(node == null){
+            return;
+        }
+        if(node.left == null && node.right == null){
+            if(sum == node.val){
+                currPath.add(node.val);
+                result.add(new ArrayList<Integer>(currPath));
+                currPath.remove(currPath.size()-1);
+            }
+            return;
+        }
+        currPath.add(node.val);
+        helper(node.left, sum - node.val, result, currPath);
+        helper(node.right, sum - node.val, result, currPath);
+        currPath.remove(currPath.size()-1);
+    }
+}
+
+// Solution 2, not as good.
 // Create a DFS recursive helper method, pass in node, sum (keep subtracting from sum),
 // and the ArrayList that contains the current path.
 // If at the leaf and the sum == 0, then add the path to result.
