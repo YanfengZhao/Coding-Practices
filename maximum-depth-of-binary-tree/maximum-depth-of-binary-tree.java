@@ -5,16 +5,6 @@ The maximum depth is the number of nodes along the longest path from the root no
 */
 
 /**
- * Definition for binary tree
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-
-/**
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
@@ -23,8 +13,23 @@ The maximum depth is the number of nodes along the longest path from the root no
  *     TreeNode(int x) { val = x; }
  * }
  */
- 
-// bfs
+
+// recursive solution
+
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        return helper(root,0);
+    }
+    
+    public int helper(TreeNode root, int level){
+        if(root == null){
+            return level;
+        }
+        return Math.max(helper(root.left,level+1),helper(root.right,level+1));
+    }
+}
+
+// bfs solution
 
 public class Solution {
     public int maxDepth(TreeNode root) {
