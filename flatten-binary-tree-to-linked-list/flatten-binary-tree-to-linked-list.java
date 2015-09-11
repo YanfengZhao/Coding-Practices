@@ -66,3 +66,35 @@ public class Solution {
         cur.right = right;
     }
 }
+
+// Solution 2 flattens left node first, switch to the right side,
+// connect with the original right side, and lastly flatten the right most node.
+
+public class Solution {
+    public void flatten(TreeNode root) {
+        if(root == null){
+            return;
+        }
+        // save the right node in a temp
+        TreeNode rightTemp = root.right;
+        // flatten left
+        flatten(root.left);
+        // move flattened left to right
+        root.right = root.left;
+        // make left null
+        root.left = null;
+        // traverse to the right most, and connect the rightTemp that was saved earlier
+        TreeNode cur = root.right;
+        if(cur == null){
+            root.right = rightTemp;
+        }
+        else{
+            while(cur.right!=null){
+                cur = cur.right;
+            }
+            cur.right = rightTemp;
+        }
+        // flatten the right most node
+        flatten(rightTemp);
+    }
+}
