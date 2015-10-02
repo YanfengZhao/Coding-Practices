@@ -17,25 +17,57 @@ Given numerator = 2, denominator = 3, return "0.(6)".
 
 public class Solution {
     public String fractionToDecimal(int numerator, int denominator) {
-        StringBuilder result = new StringBuilder();
-        String sign = (numerator < 0 == denominator < 0 || numerator == 0) ? "" : "-";
-        long num = Math.abs((long) numerator);
-        long den = Math.abs((long) denominator);
-        result.append(sign);
-        result.append(num / den);
-        long remainder = num % den;
-        if (remainder == 0)
-            return result.toString();
-        result.append(".");
-        HashMap<Long, Integer> hashMap = new HashMap<Long, Integer>();
-        while (!hashMap.containsKey(remainder)) {
-            hashMap.put(remainder, result.length());
-            result.append(10 * remainder / den);
-            remainder = 10 * remainder % den;
+        // numerator is 0
+        if (numerator == 0){
+            return "0";
         }
-        int index = hashMap.get(remainder);
-        result.insert(index, "(");
-        result.append(")");
-        return result.toString().replace("(0)", "");
+        
+        // denominator is 0
+        if (denominator == 0){
+            return "";
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        
+        // result is negative
+        if(numerator < 0 != denominator < 0){
+            sb.append("-");
+        }
+        
+        // convert int to long to avoid overflow or underflow
+        long num = Math.abs((long)numerator);
+        long den = Math.abs((long)denominator);
+        
+        // calculate quotient
+        long quotient = num/den;
+        sb.append(quotient);
+        
+        // if remainder is 0 return
+        long remainder = num % den;
+        if(remainder == 0){
+            return sb.toString();
+        }
+        
+        // if remainder is not 0, deal with decimal points
+        else{
+            sb.append(".");
+            HashMap<Long,Integer> hm= new HashMap<Long,Integer>();
+            // doens't need to check if remainder is 0 or not
+            while(!hm.containsKey(remainder)){
+                hm.put(remainder,sb.length());
+                quotient = remainder*10/den;
+                sb.append(quotient);
+                remainder = remainder*10%den;
+            }
+            
+            // insert parentheses anyways
+            int index = hm.get(remainder);
+            sb.insert(index,"(");
+            sb.append(")");
+            
+            // if there is a repeating 0, it means there is no repeats at all,
+            // so simply replace "(0)" with ""
+            return sb.toString().replace("(0)","");
+        }
     }
 }
