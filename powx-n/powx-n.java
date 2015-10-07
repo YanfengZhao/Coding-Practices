@@ -1,3 +1,33 @@
+/*
+Implement pow(x, n).
+*/
+
+// Recursion
+
+public class Solution {
+    public double myPow(double x, int n) {
+        if (n < 0) {
+		    return 1 / power(x, n);
+	    } else {
+		    return power(x, n);
+	    }
+    }
+    public double power(double x, int n) {
+    	if (n == 0)
+    		return 1;
+     
+    	double v = power(x, n / 2);
+     
+    	if (n % 2 == 0) {
+    		return v * v;
+    	} else {
+    		return v * v * x;
+    	}
+    }
+}
+
+// Iterative
+
 public class Solution {
     public double pow(double x, int n) {
         if(n==0){
@@ -12,22 +42,3 @@ public class Solution {
         return n < 0 ? 1.0 / product : product;
     }
 }
-/* recursion
- public class Solution {
-        public double pow(double x, int m) {
-            double temp=x;
-            if(m==0)
-            return 1;
-            temp=pow(x,m/2);
-            if(m%2==0)
-            return temp*temp;
-            else 
-            {
-            if(m > 0)
-                return x*temp*temp;
-            else
-                return (temp*temp)/x;
-            }
-
-    }
-*/
