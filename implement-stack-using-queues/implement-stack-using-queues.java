@@ -11,6 +11,7 @@ Depending on your language, queue may not be supported natively. You may simulat
 You may assume that all operations are valid (for example, no pop or top operations will be called on an empty stack).
 */
 
+// Solution 1
 // Use 2 queues. Maintain queue 2 as the stack.
 // Everytime you add an element, move all element to q1, add the new element to q2,
 // then move everything in q1 back to q2.
@@ -53,5 +54,41 @@ class MyStack {
     // Return whether the stack is empty.
     public boolean empty() {
         return q2.isEmpty();
+    }
+}
+
+// Solution 2
+
+class MyStack {
+    Queue<Integer> q1;
+    Queue<Integer> q2;
+    public MyStack (){
+        q1 = new LinkedList<Integer>();
+        q2 = new LinkedList<Integer>();
+    }
+    // Push element x onto stack.
+    public void push(int x) {
+        q2.offer(x);
+        while(!q1.isEmpty()){
+            q2.offer(q1.poll());
+        }
+        while(!q2.isEmpty()){
+            q1.offer(q2.poll());
+        }
+    }
+
+    // Removes the element on top of the stack.
+    public void pop() {
+        q1.poll();
+    }
+
+    // Get the top element.
+    public int top() {
+        return q1.peek();
+    }
+
+    // Return whether the stack is empty.
+    public boolean empty() {
+        return q1.isEmpty();
     }
 }
