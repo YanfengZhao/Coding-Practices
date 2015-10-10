@@ -29,7 +29,7 @@ Note: Recursive solution is trivial, could you do it iteratively?
 // REMEMBER push the right child on stack first since stack is LIFO so that the left child get printed first.
 
 // recursive
-/*public class Solution {
+public class Solution {
     private List<Integer> preorder = new LinkedList<Integer>();
     public List<Integer> preorderTraversal(TreeNode root) {
         if (root == null) return preorder;
@@ -38,7 +38,7 @@ Note: Recursive solution is trivial, could you do it iteratively?
         preorderTraversal(root.right);
         return preorder;
     }
-}*/
+}
 
 // iterative 
 public class Solution{
