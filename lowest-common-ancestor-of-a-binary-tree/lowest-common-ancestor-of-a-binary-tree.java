@@ -22,7 +22,43 @@ For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. Another exa
  *     TreeNode(int x) { val = x; }
  * }
  */
- 
+
+// A simpler solution. Only works if both p and q exist in the tree.
+// From the root, check if it's equal to p or q, if it is, then stop searching its child and return this root.
+// If the root is not equal to p or q, it looks in its left child and right child.
+// If neither left and right child return null, the root knows it is the common ancestor, so returns itself.
+// If left is null, then right must have both p and q, so return whatever is return by the right side.
+// Same thing for right.
+
+public class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null){
+            return null;
+        }
+        
+        // if root == p or q, then no need to continue
+        if(root == p || root == q){
+            return root;
+        }
+        
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        
+        // if p is in the left subtree and q is in the right subtree or vice versa, return root
+        if(left != null && right != null){
+            return root;
+        }
+        
+        if(left == null){
+            return right;
+        }
+        else{
+            return left;
+        }
+    }
+}
+
+// Solution 2
 // O(n). Once find p or q, save the path into the p or q global lists. At the end in the list find ancester.
 // Recursion.
 
