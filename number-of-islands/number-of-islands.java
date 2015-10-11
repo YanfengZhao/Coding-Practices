@@ -18,6 +18,38 @@ Example 2:
 Answer: 3
 */
 
+// Solution 1. Better solution. Without visited-2D-array.
+// Traverse the grid array. If seeing a 1, add to counter and call dfs method.
+// In dfs method, if out of bounds or currently seeing a 0, return immediately.
+// Set the current location in grid to 0 (mark as visited), and then call dfs on 4 adjacent blocks.
+
+public class Solution {
+    public int numIslands(char[][] grid) {
+        int counter = 0;
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[0].length; j++){
+                if(grid[i][j] == '1'){
+                    counter++;
+                    dfs(i,j,grid);
+                }
+            }
+        }
+        return counter;
+    }
+    
+    public void dfs(int i, int j, char[][] grid){
+        if(i<0 || i>=grid.length || j<0 || j>=grid[0].length || grid[i][j] == '0'){
+            return;
+        }
+        
+        grid[i][j] = '0';
+        dfs(i-1,j,grid);
+        dfs(i+1,j,grid);
+        dfs(i,j-1,grid);
+        dfs(i,j+1,grid);
+    }
+}
+
 // Traverse the grid.
 // Keep track of visited nodes in a 2D array.
 // Call bfs helper function on a single land to get surrounding land, after counting mark them water.
