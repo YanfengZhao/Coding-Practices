@@ -5,6 +5,38 @@ get(key) - Get the value (will always be positive) of the key if the key exists 
 set(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
 */
 
+// Solution 1.
+// Use a LinkedHashMap.
+
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+public class LRUCache extends LinkedHashMap<Integer, Integer> {
+   
+    private int capacity;
+   
+    public LRUCache(int capacity) {
+        super(capacity, 1.0f, true);  // for access order (if false, then insertion order). 1.0f is the fill ratio
+        this.capacity = capacity;
+    }
+   
+    public int get(int key) {
+        if(super.get(key) == null)
+            return -1;
+        else
+            return ((int) super.get(key));
+    }
+   
+    public void set(int key, int value) {
+        super.put(key, value);
+    }
+    
+    // override. If size is greater than capacity after an add, remove the oldest entry.
+    protected boolean removeEldestEntry(Entry entry) {
+        return (size() > this.capacity);
+    }
+}
+
+// Solution 2. 
 // Use a Hashmap<Integer,Node> and a doubly linkedList.
 // Implement 2 extra method, remove(Node n) and setHead(Node n).
 
