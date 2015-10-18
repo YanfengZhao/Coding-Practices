@@ -25,6 +25,6 @@ public class Solution {
         while(num % 5 == 0){
         	num /= 5;
         }
-        return false;
+        return num == 1;
     }
 }
