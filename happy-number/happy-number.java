@@ -13,26 +13,23 @@ Example: 19 is a happy number
 
 // use hashset to keep track of numbers that have already appeared to avoid infinite loop
 
-public class Solution {
-    public boolean isHappy(int n) {
+public boolean isHappy(int n) {
         HashSet<Integer> hs = new HashSet<Integer>();
-        int sum = 0;
+        hs.add(n);
         while(n!=1){
-            while(n != 0){
-                int digit;
-                digit = n%10;
-                n/=10;
+            int sum = 0;
+            while(n!=0){
+                int digit = n%10;
                 sum = sum + digit * digit;
+                n/=10;
+            }
+            if(hs.contains(sum)){
+                return false;
+            }
+            else{
+                hs.add(sum);
             }
             n = sum;
-            sum = 0;
-            if(hs.contains(n)){
-                    return false;
-                }
-            else{
-                hs.add(n);
-            }
         }
         return true;
     }
-}
