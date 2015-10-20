@@ -13,6 +13,32 @@ Return
 ]
 */
 
+// solution that's easy to understand:
+
+public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(numRows < 1){
+            return result;
+        }
+        ArrayList<Integer> prev = new ArrayList<Integer>();
+        prev.add(1);
+        result.add(prev);
+        if(numRows == 1){
+            return result;
+        }
+        for(int i = 2; i <= numRows; i++){
+            ArrayList<Integer> curRow = new ArrayList<Integer>();
+            curRow.add(1);
+            for(int j = 0; j < prev.size()-1;j++){
+                curRow.add(prev.get(j)+prev.get(j+1));
+            }
+            curRow.add(1);
+            result.add(curRow);
+            prev = curRow;
+        }
+        return result;
+    }
+}
 // no need to make special case for row 1 and row 2.
 // traverse each row, and reuse the row from above and keep building off of it.
 // remember at the beginning of each row, add a 1 in front of it.
