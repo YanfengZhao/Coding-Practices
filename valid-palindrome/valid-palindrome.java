@@ -26,3 +26,35 @@ public class Solution {
         else return false;
     }
 }
+
+// Solution 2. Use 2 pointer method.
+
+public class Solution {
+    public boolean isPalindrome(String s) {
+        if(s == null || s.length() == 0){
+            return true;
+        }
+        int p1 = 0;
+        int p2 = s.length()-1;
+        s = s.toLowerCase();
+        while(p1 < p2){
+            char c1 = s.charAt(p1);
+            char c2 = s.charAt(p2);
+            if(!(c1>='a' && c1<='z') && !(c1>='0' &&c1<='9')){
+                p1++;
+            }
+            else if(!(c2>='a' && c2<='z') && !(c2>='0' &&c2<='9')){
+                p2--;
+            }
+            else if(c1!=c2){
+                return false;
+                
+            }
+            else{
+                p1++;
+                p2--;
+            }
+        }
+        return true;
+    }
+}
