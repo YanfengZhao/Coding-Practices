@@ -53,3 +53,30 @@ public class Solution {
         return counter;
     }
 }
+
+// Solution 2. Recursion
+
+public class Solution {
+    public int minDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return helper(root,1);
+    }
+    
+    public int helper(TreeNode root, int level){
+
+        if(root.left == null && root.right == null){
+            return level;
+        }
+        else if(root.left == null){
+            return helper(root.right,level+1);
+        }
+        else if(root.right == null){
+            return helper(root.left,level+1);
+        }
+        else{
+            return Math.min(helper(root.left,level+1),helper(root.right,level+1));
+        }
+    }
+}
