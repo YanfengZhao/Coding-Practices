@@ -18,7 +18,7 @@ You may assume that all operations are valid (for example, no pop or top operati
 
 class MyStack {
     Queue<Integer> q1;
-    Queue<Integer> q2 = new LinkedList<Integer>();
+    Queue<Integer> q2;
     
     public MyStack(){
         q1 = new LinkedList<Integer>();
