@@ -51,12 +51,7 @@ public class Solution {
         while(!pq.isEmpty()){
             cur.next = pq.poll().node;
             cur = cur.next;
-            if(pq.peek() == null){
-                cur.next = null;
-            }
-            else{
-                cur.next = pq.peek().node;
-            }
+            cur.next = null; // set current node's next as null (cur is end of list as of now)
         }
         return dummy.next;
     }
