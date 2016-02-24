@@ -22,6 +22,7 @@ Return 0.
 
 // Solution 2. This solution does not pass Leetcode due to memory limit exceeded
 // as well as the array created is greater than maximum size array allowed in Java.
+// However this solution works if there is no memory limit.
 
 public class Solution {
     public int minPatches(int[] nums, int n) {
