@@ -10,6 +10,57 @@ Given [5, 7, 7, 8, 8, 10] and target value 8,
 return [3, 4].
 */
 
+// A O(log(n)) solution
+// Binary search twice for the left most then the right most occurence.
+// Only modification to the binary search is that once found,
+// if seraching for left most, we update the newly found left most index
+// and set the new right to mid -1.
+// Do the same while looking for right most occurence.
+
+public class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int leftIndex = -1;
+        int rightIndex = -1;
+        // search for left most target
+        
+        int l = 0;
+        int r = nums.length-1;
+        while(l<=r){
+            int mid = (l+r)/2;
+            if(nums[mid] == target){
+                leftIndex = mid;
+                r = mid-1;
+            }
+            else if(nums[mid]<target){
+                l = mid+1;
+            }
+            else{
+                r = mid-1;
+            }
+        }
+        
+        l = 0;
+        r = nums.length-1;
+        while(l<=r){
+            int mid = (l+r)/2;
+            if(nums[mid] == target){
+                rightIndex = mid;
+                l = mid+1;
+            }
+            else if(nums[mid]<target){
+                l = mid+1;
+            }
+            else{
+                r = mid-1;
+            }
+        }
+        
+        return new int[]{leftIndex,rightIndex};
+    }
+}
+
+
+// A O(n) solution
 // Use binary search to find a single instance of the element. If element doesn't exist, return -1 -1.
 // If found, use linear probing to left and right until finding the last index with same element both ways. Return the pair.
 
