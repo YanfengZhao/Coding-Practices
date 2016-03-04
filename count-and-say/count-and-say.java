@@ -10,11 +10,50 @@ Given an integer n, generate the nth sequence.
 Note: The sequence of integers will be represented as a string.
 */
 
-// use recursion to this problem by creating a helper recursive method.
-// first parameter contains the initial string, second parameter contains the current index, third parameter contains the index trying to reach.
-// base case is when index == target.
-// save the 0th index and start at 1st index.
-// count and add the number of appearances in the string builder. 
+// First solution we use the iterative method
+
+public class Solution {
+    public String countAndSay(int n) {
+        if(n < 1){
+            return "";
+        }
+
+        String result = "1";
+        for(int i = n; i >= 2; i--){
+            char[] arr = result.toCharArray();
+            
+            StringBuilder sb = new StringBuilder();
+            int counter = 1;
+            for(int j = 0; j < arr.length; j++){
+                // if is last element
+                if(j == arr.length-1){
+                    sb.append(counter);
+                    sb.append(arr[j]);
+                }
+                // if not equal to next element
+                else if(arr[j] != arr[j+1]){
+                    sb.append(counter);
+                    sb.append(arr[j]);
+                    counter = 1;
+                }
+                // if equal to next element
+                else{
+                    counter++;
+                }
+            }
+
+            result = sb.toString();
+        }
+        
+        return result;
+    }
+}
+
+// Second solution we use recursion to this problem by creating a helper recursive method.
+// First parameter contains the initial string, second parameter contains the current index, third parameter contains the index trying to reach.
+// Base case is when index == target.
+// Save the 0th index and start at 1st index.
+// Count and add the number of appearances in the string builder. 
 
 public class Solution {
     public String countAndSay(int n) {
