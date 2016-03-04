@@ -10,6 +10,30 @@ Here are few examples.
 [1,3,5,6], 0 → 0
 */
 
+// Solution 3 is the optimal solution. O(log n) with clean code.
+// The key to this solution is that there is no reason to consider the
+// case where the number is found while doing the binary search.
+// In the end simply return left.
+
+public class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int l = 0;
+        int r = nums.length-1;
+        
+        while(l<=r){
+            int mid = (l+r)/2;
+            if(nums[mid]<target){
+                l = mid+1;
+            }
+            else{
+                r = mid-1;
+            }
+        }
+        return l;
+    }
+}
+
+
 // Solution 2 is trival O(n) time.
 // Solution 1 is using binary search. O(log n) time.
 public class Solution {
