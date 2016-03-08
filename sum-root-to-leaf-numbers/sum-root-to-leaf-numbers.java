@@ -25,7 +25,35 @@ Return the sum = 12 + 13 = 25.
  *     TreeNode(int x) { val = x; }
  * }
  */
- 
+
+// Solution 0. Cleanist code  solution with a global sum.
+
+public class Solution {
+    int sum = 0;
+    public int sumNumbers(TreeNode root) {
+        
+        helper(root,0);
+        return sum;
+    }
+    
+    public void helper(TreeNode node, int curr){
+        // if leaf node is null
+        if(node == null){
+            return;
+        }
+        if(node.left == null && node.right == null){
+            curr*=10;
+            curr+=node.val;
+            sum+=curr;
+            return;
+        }
+        curr*=10;
+        curr+=node.val;
+        helper(node.left,curr);
+        helper(node.right,curr);
+    }
+}
+
 // use dfs and recursion, O(n).
 // If left and right are null, then you are at the leaf node, return a number.
 // otherwise keep calculating.
