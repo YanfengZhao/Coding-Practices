@@ -54,29 +54,35 @@ public class Solution {
 // The basic idea is just choose or not choose the current number.
 
 public class Solution {
-    Set<List<Integer>> result = new HashSet<List<Integer>>();
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        if(candidates.length == 0){
-            return new ArrayList<List<Integer>>(result);
+        Set<List<Integer>> result = new HashSet<List<Integer>>();
+        if(candidates == null || candidates.length == 0){
+            return new ArrayList<List<Integer>>();
         }
         Arrays.sort(candidates);
-        ArrayList<Integer> currList = new ArrayList<Integer>();
-        helper(candidates, target, 0, currList);
+        ArrayList<Integer> curList = new ArrayList<Integer>();
+        helper(result,candidates,target,0,curList);
         return new ArrayList<List<Integer>>(result);
     }
-    
-    public void helper(int[] candidates, int target, int start, ArrayList<Integer> currList){
-        if(target == 0){
-            result.add(new ArrayList<Integer>(currList));
+    public void helper(Set<List<Integer>> result, int[] candidates, int target, int i, ArrayList<Integer> curList){
+        if(candidates[i] > target){
+            return;
+        }
+        if(target == candidates[i]){
+            curList.add(candidates[i]);
+            result.add(new ArrayList<Integer>(curList));
+            curList.remove(curList.size()-1);
             return;
         }
         
-        for(int i = start; i < candidates.length; i++){
-            if(target - candidates[i] >= 0){
-                currList.add(candidates[i]);
-                helper(candidates, target - candidates[i], i+1, currList);
-                currList.remove(currList.size()-1);
-            }
+        if(i+1 > candidates.length-1){
+            return;
+        }
+        else{
+            helper(result, candidates, target, i+1, curList);
+            curList.add(candidates[i]);
+            helper(result, candidates, target-candidates[i], i+1, curList);
+            curList.remove(curList.size()-1);
         }
     }
 }
