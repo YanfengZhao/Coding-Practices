@@ -47,3 +47,35 @@ public class Solution {
         }
     }
 }
+
+// Second solution, without any loops. A little slower than first version due to
+// more recursive calls.
+
+public class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Set<List<Integer>> result = new HashSet<List<Integer>>();
+        if(candidates == null || candidates.length == 0){
+            return new ArrayList<List<Integer>>();
+        }
+        Arrays.sort(candidates);
+        ArrayList<Integer> curList = new ArrayList<Integer>();
+        helper(result,candidates,target,0,curList);
+        return new ArrayList<List<Integer>>(result);
+    }
+    public void helper(Set<List<Integer>> result, int[] candidates, int target, int i, ArrayList<Integer> curList){
+        if(i>candidates.length-1 || target < 0){
+            return;
+        }
+        if(target == candidates[i]){
+            curList.add(candidates[i]);
+            result.add(new ArrayList<Integer>(curList));
+            curList.remove(curList.size()-1);
+            return;
+        }
+       
+        helper(result, candidates, target, i+1, curList);
+        curList.add(candidates[i]);
+        helper(result, candidates, target-candidates[i], i+1, curList);
+        curList.remove(curList.size()-1);
+    }
+}
