@@ -42,3 +42,57 @@ public class Solution {
         return sb.toString();
     }
 }
+
+// Use the method of how we multiply in elementary school.
+// Create an array size of size(num1) + size(num2).
+// Deal with carry before addition to the array.
+// This solution is slower compare to the first solution.
+
+public class Solution {
+    public String multiply(String num1, String num2) {
+        int s1 = num1.length();
+        int s2 = num2.length();
+        int[] arr = new int[s1+s2];
+        boolean greaterThanZero = false;
+        for(int i = num1.length()-1; i >= 0; i--){
+            for(int j = num2.length()-1; j >= 0; j--){
+                int n1 = num1.charAt(i) - '0';
+                int n2 = num2.charAt(j) - '0';
+                int product = n1*n2;
+                if(product != 0){
+                    greaterThanZero = true;
+                }
+                
+                int sum = product%10+arr[i+j+1];
+                
+                if(sum > 9){
+                    arr[i+j+1] = sum % 10;
+                    arr[i+j]++;
+                }
+                else{
+                    arr[i+j+1] = sum;
+                }
+                sum = product/10%10+arr[i+j];
+                if(sum > 9){
+                    arr[i+j] = sum % 10;
+                    arr[i+j-1]++;
+                }
+                else{
+                    arr[i+j] = sum;
+                }
+            }
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        for(int i:arr){
+            sb.append(i);
+        }
+        String result = sb.toString();
+        if(greaterThanZero){
+            return result.replaceFirst ("^0*", "");
+        }
+        else{
+            return "0";
+        }
+    }
+}
