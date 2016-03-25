@@ -30,3 +30,33 @@ public class Solution {
         }
     }
 }
+
+// Solution #2.
+// First swap top and left, then right and bottom, lastly right and left.
+
+public class Solution {
+    public void rotate(int[][] matrix) {
+        int length = matrix.length;
+        int iterations = matrix.length/2;
+        int curLayer = 0;
+        
+        while(curLayer < iterations){
+            for(int i = curLayer+1; i < length-curLayer; i++){
+                int temp;
+                // swap top and left
+                temp = matrix[curLayer][i];
+                matrix[curLayer][i] = matrix[length-1-i][curLayer];
+                matrix[length-1-i][curLayer] = temp;
+                // swap right and bottom
+                temp = matrix[i][length-1-curLayer];
+                matrix[i][length-1-curLayer]=matrix[length-1-curLayer][length-1-i];
+                matrix[length-1-curLayer][length-1-i]=temp;
+                // swap right and left
+                temp = matrix[i][length-1-curLayer];
+                matrix[i][length-1-curLayer] = matrix[length-1-i][curLayer];
+                matrix[length-1-i][curLayer]=temp;
+            }
+            curLayer++;
+        }
+    }
+}
