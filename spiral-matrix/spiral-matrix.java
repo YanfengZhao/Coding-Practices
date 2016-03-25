@@ -44,3 +44,50 @@ public class Solution {
         return result;
     }
 }
+
+// Solution 2. Have different value for iteration based on the shorter
+// of rows and cols is odd or even.
+
+public class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<Integer>();
+        if(matrix == null || matrix.length == 0){
+            return result;
+        }
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int iteration;
+        if(Math.min(rows,cols) %2 == 0){
+            iteration = Math.min(rows,cols)/2;
+        }
+        else{
+            iteration = Math.min(rows,cols)/2+1;
+        }
+        int layers = 0;
+        
+        while(layers < iteration){
+            // top
+            for(int i = layers; i <= cols - 2 - layers; i++){
+                result.add(matrix[layers][i]);
+            }
+            
+            // right
+            for(int i = layers; i <= rows-1-layers; i++){
+                result.add(matrix[i][cols-layers-1]);
+            }
+            
+            // bottom
+            for(int i = cols-layers-2; i > layers && layers != rows - 1 - layers; i--){
+                result.add(matrix[rows-layers-1][i]);
+            }
+            
+            // left
+            for(int i = rows-layers-1; i > layers && layers != cols -1 - layers; i--){
+                result.add(matrix[i][layers]);
+            }
+            layers++;
+        }
+        
+        return result;
+    }
+}
