@@ -12,6 +12,51 @@ You should return the following matrix:
 ]
 */
 
+// Iterative solution.
+// If n is a odd number, simply add the last num to the middle of the
+// matrix at the very end of the program.
+
+public class Solution {
+    public int[][] generateMatrix(int n) {
+        int layers = 0;
+        int iteration = n/2;
+        int[][] matrix = new int[n][n];
+        
+        int num = 1;
+        while(layers<iteration){
+            // top
+            for(int i = layers; i < n-1-layers; i++){
+                matrix[layers][i] = num;
+                num++;
+            }
+            
+            // right
+            for(int i = layers; i < n-1-layers; i++){
+                matrix[i][n-1-layers] = num;
+                num++;
+            }
+            
+            // bottom
+            for(int i = n-1-layers; i>=layers+1; i--){
+                matrix[n-1-layers][i] = num;
+                num++;
+            }
+            
+            // left
+            for(int i = n-1-layers; i>=layers+1; i--){
+                matrix[i][layers] = num;
+                num++;
+            }
+            layers++;
+        }
+        // if odd
+        if(n%2 != 0){
+            matrix[n/2][n/2] = num;
+        }
+        return matrix;
+    }
+}
+
 // Recursion. 
 public class Solution {
     public int[][] generateMatrix(int n) {
