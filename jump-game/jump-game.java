@@ -11,6 +11,33 @@ A = [2,3,1,1,4], return true.
 A = [3,2,1,0,4], return false.
 */
 
+// Optimal solution. Start from the back.
+// Notice: Cannot start from the very last element because it can be 0.
+// Set a distanceAway variable to see how far the current number need to reach for the condition to be true.
+// If too far, we move on to the number before and see if it can reach.
+// If yes, then we reset the distance to 1, else continue increase distance.
+// After the for loop, if distance is only 1, then return true, else return false.
+
+public class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums.length<=1){
+            return true;
+        }
+        int distanceAway = 1;
+        // Cannot start from the very last element because it can be 0.
+        for(int i = nums.length-2; i >= 0; i--){
+            if(nums[i]<distanceAway){
+                distanceAway++;
+            }
+            else{
+                distanceAway = 1;
+            }
+        }
+        return distanceAway == 1;
+    }
+}
+
+// Second solution. Still really good but not optimal.
 // First set the reachable to the first element in the array.
 // Keep track the the max reachable at all times.
 // Iterate through every element.
@@ -42,7 +69,7 @@ public class Solution {
     }
 }
 
-// Solution 2. Cause runtime stack overflow error.
+// Solution 3. Cause runtime stack overflow error.
 // Not very efficient because of recursion.
 
 public class Solution {
