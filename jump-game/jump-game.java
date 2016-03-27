@@ -41,3 +41,35 @@ public class Solution {
         return true;
     }
 }
+
+// Solution 2. Cause runtime stack overflow error.
+// Not very efficient because of recursion.
+
+public class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums.length==0 || nums.length==1){
+            return true;
+        }
+        return helper(nums, new boolean[nums.length], 0);
+    }
+    
+    public boolean helper(int[] nums, boolean[] calc, int i){
+        if(i == nums.length-1){
+            return true;
+        }
+        
+        if(i > nums.length-1 || nums[i] == 0){
+            return false;
+        }
+        
+        for(int j = 1; j<=nums[i]; j++){
+            if(!calc[i+j]){
+                calc[i+j] = true;
+                if(helper(nums,calc,i+j)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
