@@ -44,16 +44,14 @@ public class Solution {
                 break;
             }
         }
-        for(int i = 1; i < c; i++){
+        
+	for(int i = 1; i < c; i++){
             for(int j = 1; j < r; j++){
-                if(obstacleGrid[i][j]==1){
-                    grid[i][j] = 0;
-                }
-                else{
+                if(obstacleGrid[i][j]==0){
                     grid[i][j] = grid[i-1][j]+grid[i][j-1];
                 }
             }
         }
-        return grid[c-1][r-1];
+	return grid[c-1][r-1];
     }
 }
