@@ -25,7 +25,7 @@ public class Solution {
         	else if(nums[i] == 2){
         		swap(nums,i,p2);
         		p2--;
-        		i--;
+        		i--; // need to recalculate the num at i because it might be 0 or 1
         	}
         }
     }
