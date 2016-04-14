@@ -25,7 +25,6 @@ If nums = [1,2,3], a solution is:
 // After adding S0：[], [S0]
 // After adding S1：[], [S0], [S1], [S0, S1]
 // After adding S2：[], [S0], [S1], [S0, S1], [S2], [S0, S2], [S1, S2], [S0, S1, S2]
-
 public class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
@@ -53,8 +52,35 @@ public class Solution {
         }
         return result;
     }
+}
+
+// Solution 2. Recursive solution.
+// Sort the array first.
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        result.add(new ArrayList<Integer>());
+        helper(result,nums,new ArrayList<Integer>(),0);
+        return result;
+    }
     
-    public List<List<Integer>> subsetsS2(int[] nums) {
+    public void helper(List<List<Integer>> result, int[] nums, ArrayList<Integer> cur, int index){
+        if(index==nums.length){
+            return;
+        }
+        for(int i = index; i < nums.length; i++){
+            cur.add(nums[i]);
+            result.add(new ArrayList<Integer>(cur));
+            helper(result,nums,cur,i+1);
+            cur.remove(cur.size()-1);
+        }
+    }
+}
+
+// Solution 3. Don't remember why I wrote this...
+public class Solution {   
+    public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         int size = nums.length;
         if(size == 0){
