@@ -20,7 +20,35 @@ The first node is considered odd, the second node even and so on ...
  *     ListNode(int x) { val = x; }
  * }
  */
- 
+
+// Optimal solution. Pay attention to the condition in while loop.
+
+public class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        if(head.next == null){
+            return head;
+        }
+        
+        ListNode p1 = head;
+        ListNode p2 = head.next;
+        ListNode evenHead = p2;
+        while(p2 != null && p2.next != null){
+            p1.next = p2.next;
+            p1 = p1.next;
+            p2.next = p1.next;
+            p2 = p2.next;
+        }
+        p1.next = evenHead;
+        return head;
+    }
+}
+
+// Another solution.
+// Create 2 nodes and append odd and even nodes to those nodes.
+
 public class Solution {
     public ListNode oddEvenList(ListNode head) {
         if (head == null){
