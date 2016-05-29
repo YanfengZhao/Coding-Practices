@@ -8,9 +8,23 @@ Find the minimum element.
 You may assume no duplicate exists in the array.
 */
 
+// Recursive solution.
+
+public class Solution {
+    public int findMin(int[] nums) {
+        return helper(nums,0,nums.length-1);
+    }
+    public int helper(int[] nums, int i, int j){
+        if(nums[i] <= nums[j]){
+            return nums[i];
+        }
+        return Math.min(helper(nums,i,(j+i)/2),helper(nums,(j+i)/2+1,j));
+    }
+}
+
 // Binary search. log(n) time complexity.
-// If mid is less than right, that means the min is somewhere on the right side.
-// Else the min is on the left side.
+// If mid is less than right, that means the min is somewhere on the left side.
+// Else the min is on the right side.
 
 public class Solution {
     public int findMin(int[] nums) {
