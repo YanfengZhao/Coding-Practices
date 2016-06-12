@@ -41,3 +41,36 @@ public class Solution {
         }
     }
 }
+
+// Solution with DO WHILE loop
+// Have 2 pointers, p1 is for going back when there isn't enough gas,
+// p2 is for going foward. GasLeft keeps track of net gas amount at
+// a certain time.
+// The key is to use a DO WHILE loop so it is ok to have p1 and p2
+// both start at index 0.
+// The do while loop terminates when the 2 pointers overlap again.
+// In the end if the net is not negative, just return p1,
+// otherwise return -1 which mean isn't possible.
+
+public class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int p1 = 0;
+        int p2 = 0;
+        int gasLeft = 0;
+        do{
+            if (gasLeft < 0){
+                p1 = (p1+ gas.length - 1) % gas.length;
+                gasLeft = gasLeft + gas[p1] - cost[p1];
+            }
+            else{
+                gasLeft = gasLeft + gas[p2] - cost[p2];
+                p2++;
+            }
+        }
+        while(p2 % gas.length!=p1);
+        if (gasLeft>=0){
+            return p1;
+        }
+        return -1;
+    }
+}
