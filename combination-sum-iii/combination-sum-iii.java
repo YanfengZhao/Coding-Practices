@@ -21,6 +21,35 @@ Output:
 [[1,2,6], [1,3,5], [2,3,4]]
 */
 
+// Cleaner solution with no global variable.
+
+public class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        helper(k, n, new ArrayList<Integer>(), result, 1);
+        return result;
+    }
+    public void helper(int k, int n, ArrayList<Integer> curList, List<List<Integer>> result, int nextInt){
+        if(n == 0 && curList.size() == k){
+            result.add(new ArrayList<Integer>(curList));
+            return;
+        }
+        else if (curList.size() == k){
+            return;
+        }
+        else{
+            for(int i = nextInt; i <= 9; i++){
+                if(n-i < 0){
+                    break;
+                }
+                curList.add(i);
+                helper(k, n-i, curList, result, i+1);
+                curList.remove(curList.size()-1);
+            }
+        }
+    }
+}
+
 // DFS recursion. 
 // Keep track of k and n. Everytime call helper method, decrease k by 1 and decrease n by the current value added to currList.
 // Base case is when k and n both == 0. Or when k is 0 but n is not 0.
