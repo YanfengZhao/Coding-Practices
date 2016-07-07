@@ -11,6 +11,29 @@ Return:
 ["AAAAACCCCC", "CCCCCAAAAA"].
 */
 
+// Here is the easy to understand and fastest solution
+// But this might become slow if instead of length 10, the repeated
+// sequence you are looking for is length 1000, the hashing would be very 
+// slow, which means you should use the second solution.
+
+public class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        if(s.length() < 10){
+            return new ArrayList<String>();
+        }
+        Set<String> result = new HashSet<>();
+        Set<String> hs = new HashSet<>();
+        
+        for(int i = 0; i < s.length() - 9; i++){
+            String subs = s.substring(i, i + 10);
+            if(!hs.add(subs)){
+                result.add(subs);
+            }
+        }
+        return new ArrayList<String>(result);
+    }
+}
+
 // The trick to this problem is to write your own encoding hashing function,
 // because it cost a lot to map a 10 character string into a hash.
 // So instead convert the 10 digit string to base 4 integer then use hashmap to count each pattern's occurance.
