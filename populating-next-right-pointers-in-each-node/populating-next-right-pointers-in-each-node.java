@@ -37,6 +37,26 @@ After calling your function, the tree should look like:
  *     TreeLinkNode(int x) { val = x; }
  * }
  */
+
+// This solution is O(1) if recursion stack space isn't counted.
+// The base case is that if root is null or left is null, then we are done.
+// Then we first connect the left child and the right child.
+// Secondly we check whether the current node has a next or not (because it would have been populated the previous layer).
+// If it does, connect current node's right to next node's left.
+// Repeat the this entire process for the current node's left node and right node.
+
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if (root != null && root.left != null){
+            root.left.next = root.right;
+            if (root.next != null){
+                root.right.next = root.next.left;
+            }
+            connect(root.left);
+            connect(root.right);
+        }
+    }
+}
  
 // bfs. Level by level.
 // don't forget to make sure root is not null.
