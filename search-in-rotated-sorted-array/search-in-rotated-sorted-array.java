@@ -8,6 +8,48 @@ You are given a target value to search. If found in the array return its index, 
 You may assume no duplicate exists in the array.
 */
 
+// This solution is more clear than the next one with the similar binary search approach.
+
+public class Solution {
+    public int search(int[] nums, int target) {
+        return binarySearch(nums, target, 0, nums.length - 1);
+    }
+    
+    public int binarySearch(int[] nums, int target, int l, int r){
+        if (l > r){
+            return -1;
+        }
+        
+        int m = (l + r)/2;
+        
+        if (nums[m] == target){
+            return m;
+        }
+        
+        // right side sorted and target on right side
+        if (nums[m] < nums[r] && target > nums[m] && target <= nums[r]){
+            return binarySearch(nums, target, m + 1, r);
+        }
+        
+        // right side sorted and target not on right side
+        if (nums[m] < nums[r] && (target < nums[m] || target > nums[r])){
+            return binarySearch(nums, target, l, m - 1);
+        }
+        
+        // left side sorted and target on left side
+        if (nums[l] <= nums[m] && target >= nums[l] && target < nums[m]){
+            return binarySearch(nums, target, l, m - 1);
+        }
+        
+        // left side sorted and target not on left side
+        if (nums[l] <= nums[m] && (target < nums[l] || target > nums[m])){
+            return binarySearch(nums, target, m + 1, r);
+        }
+        
+        return -1;
+    }
+}
+
 // O(log n) time recursion. Similar to a binary search.
 // Compare mid to right, if nums[mid]<nums[right], means the right side is sorted.
 // If target is less than mid, then there is no reason to look on the right side.
