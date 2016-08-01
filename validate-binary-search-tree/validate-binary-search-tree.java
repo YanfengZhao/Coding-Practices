@@ -18,6 +18,24 @@ Both the left and right subtrees must also be binary search trees.
  * }
  */
 
+// Just an inorder traversal. Have an global make sure current is bigger than previous.
+// This solution doesn't need helper method and is cleaner.
+
+public class Solution {
+    TreeNode prev = null;
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+        boolean left = isValidBST(root.left);
+        if (prev != null && root.val <= prev.val) {
+            return false;
+        } else {
+            prev = root;
+        }
+        boolean right = isValidBST(root.right);
+        return left && right;
+    }
+}
+
 // Uses in-order traversal.
 // keep a global TreeNode prev to ensure later nodes are greater than prev nodes.
 // check left node see if true, then check current node, lastly check the right node.
