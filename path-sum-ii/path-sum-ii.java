@@ -26,7 +26,44 @@ return
  *     TreeNode(int x) { val = x; }
  * }
  */
- 
+
+// Solution 0, best solution, beats 95.85% submissions.
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> results = new ArrayList<>();
+        helper(root, results, new ArrayList<Integer>(), sum);
+        return results;
+    }
+    
+    public void helper(TreeNode root, List<List<Integer>> results, List<Integer> cur, int sum){
+        if (root == null){
+            return;
+        }
+        
+        cur.add(root.val);
+        
+        if (root.left == null && root.right == null && sum == root.val){
+            results.add(new ArrayList<Integer>(cur));
+            cur.remove(cur.size() - 1);
+            return;
+        }
+        
+        helper(root.left, results, cur, sum - root.val);
+        helper(root.right, results, cur, sum - root.val);
+        cur.remove(cur.size() - 1);
+    }
+}
+
 // Solution 1 does not use global result, it is passed in.
 // You also call the helper method on null nodes, but it will be taken care of first thing in the method.
 // For every node you add into currPath, subtract the value from sum.
