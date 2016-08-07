@@ -1,8 +1,10 @@
-/* Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
+/*
+Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
 
 Calling next() will return the next smallest number in the BST.
 
-Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree. */
+Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
+*/
 
 /**
  * Definition for binary tree
@@ -14,43 +16,43 @@ Note: next() and hasNext() should run in average O(1) time and uses O(h) memory,
  * }
  */
 
-// Similar to inorder traversal.
-// If have left child, push all on to stack in the constructor.
-// hasNext() just need to check if stack is empty.
-// in next(), if hasNext() == false, return 0.
-// else, pop one off stack, check if the one has right child.
-// if it does, add all it's left child nodes to stack.
+// Use a stack, initialize it by pushing the left node on until the smallest number is added.
+// For getting the next, save the number on top of the stack, which will be the result,
+// See if that node has a right child, and then push that node and every number to the left of it onto the stack.
 
 public class BSTIterator {
-    Stack<TreeNode> stack = new Stack<TreeNode>();
-    TreeNode curr;
+    public Stack<TreeNode> stack;
     public BSTIterator(TreeNode root) {
-        curr = root;
-        while(curr!=null){
-            stack.push(curr);
-            curr = curr.left;
+        stack = new Stack<>();
+        if (root != null){
+            stack.push(root);
+            while(root.left != null){
+                stack.push(root.left);
+                root = root.left;
+            }
         }
     }
 
     /** @return whether we have a next smallest number */
     public boolean hasNext() {
-        return !stack.empty();
+        if (stack.isEmpty()){
+            return false;
+        }
+        return true;
     }
 
     /** @return the next smallest number */
     public int next() {
-        if(hasNext() == false){
-            return 0;
-        }
         TreeNode temp = stack.pop();
-        if(temp.right!=null){
-            TreeNode right = temp.right;
-            while(right!=null){
-                stack.push(right);
-                right = right.left;
+        int result = temp.val;
+        if (temp.right != null){
+            temp = temp.right;
+            while(temp != null){
+                stack.push(temp);
+                temp = temp.left;
             }
         }
-        return temp.val;
+        return result;
     }
 }
 
